@@ -105,6 +105,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        sqlHelper.close();
+        database.close();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sqlHelper = null;
+        database = null;
+    }
+
     private void createView() {
         imageView = findViewById(R.id.imageUser);
         nameTextView = findViewById(R.id.nameTextView);
@@ -271,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
 
         return cv;
     }
+
 
 
 }
