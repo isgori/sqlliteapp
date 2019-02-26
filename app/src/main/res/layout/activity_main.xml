@@ -23,23 +23,63 @@
         android:layout_width="@dimen/picture_width"
         android:layout_height="@dimen/picture_height"
         android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/labelNameTextView"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/width_text_main_activity"
+        android:text="@string/name"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/nameTextView"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginTop="8dp"
         android:layout_width="@dimen/width_text_main_activity"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/labelLastTextView"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/width_text_main_activity"
+        android:text="@string/last"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/lastTextView"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginTop="8dp"
         android:layout_width="@dimen/width_text_main_activity"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/labelAddressTextView"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/width_text_main_activity"
+        android:text="@string/address"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/addressTextView"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginTop="8dp"
         android:layout_width="@dimen/width_text_main_activity"
         android:layout_height="wrap_content" />
+
+
+    <fragment
+        android:layout_marginTop="@dimen/margin_top"
+        android:id="@+id/firsFragment"
+        android:name="com.example.sqlliteapp.buttons"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        />
+    <FrameLayout
+        android:id="@+id/frameLayoutContainer"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"/>
 
 </LinearLayout>
