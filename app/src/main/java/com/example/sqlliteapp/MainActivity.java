@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,10 +92,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userBD = getUser();
-                /*
                 Intent openActivity = new Intent(MainActivity.this, list_data.class);
-                openActivity.putParcelableArrayListExtra("userBD",userBD);
-                startActivity(openActivity);*/
+                User.dataDB = getUser();
+                startActivity(openActivity);
             }
         });
 
