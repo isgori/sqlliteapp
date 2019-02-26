@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="picture_height_landscap">200dp</dimen>
+    <dimen name="picture_width_landscap">200dp</dimen>
+    <dimen name="picture_width">300sp</dimen>
+    <dimen name="picture_height">200sp</dimen>
+    <dimen name="margin_top">24dp</dimen>
+    <dimen name="width_text_main_activity">200sp</dimen>
+</resources>
