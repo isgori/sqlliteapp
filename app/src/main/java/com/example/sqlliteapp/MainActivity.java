@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sqlliteapp.DatabaseSQLlite.MySQLLiteHelper;
 import com.example.sqlliteapp.api.RandomAPI;
@@ -62,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG="MainActivity_TAG";
 
-    private Button buttonNext,buttonSave,buttonShowDataBase ;
+    private Button buttonNext,buttonSave,buttonShowDataBase;
+    private ImageButton buttonRefresh ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,13 +94,16 @@ public class MainActivity extends AppCompatActivity {
         buttonShowDataBase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userBD = getUser();
                 Intent openActivity = new Intent(MainActivity.this, list_data.class);
-                User.dataDB = getUser();
+                try {
+                    User.dataDB = getUser();
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
                 startActivity(openActivity);
             }
         });
-
+        buttonRefresh = findViewById(R.id.buttonRefresh);
         Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView);
 
         sqlHelper = new MySQLLiteHelper(getApplicationContext());
@@ -106,16 +112,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (sqlHelper==null || database == null){
+            sqlHelper = new MySQLLiteHelper(getApplicationContext());
+            database = sqlHelper.getWritableDatabase();
+
+        }else{
+            sqlHelper = new MySQLLiteHelper(getApplicationContext());
+            database = sqlHelper.getWritableDatabase();
+        }
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
-        sqlHelper.close();
-        database.close();
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        sqlHelper.close();
+        database.close();
         sqlHelper = null;
         database = null;
     }
@@ -201,6 +221,10 @@ public class MainActivity extends AppCompatActivity {
     private void addNewUser(){
         try {
 
+            buttonShowDataBase.setEnabled(false);
+            buttonSave.setEnabled(false);
+            buttonNext.setEnabled(false);
+            buttonRefresh.setEnabled(false);
             long result =database.insert(UserEntry.Tablename , null, preparedNewUser(infoO.getSeed(),
                     nameO.getFirst(),
                     nameO.getLast(),
@@ -215,14 +239,22 @@ public class MainActivity extends AppCompatActivity {
                     cell,
                     pictureO.getLarge()));
             if (result>0){
-                Log.d(TAG, "addNewUser: add");
+                Toast.makeText(this,"Save",Toast.LENGTH_SHORT).show();
             }else  {
-                Log.d(TAG, "addNewUser: No add");
+                Toast.makeText(this,"Not Save",Toast.LENGTH_SHORT).show();
             }
+
+
 
         }catch (Exception ex){
             ex.printStackTrace();
+            Toast.makeText(this,"Not Save",Toast.LENGTH_SHORT).show();
         }
+
+        buttonShowDataBase.setEnabled(true);
+        buttonSave.setEnabled(true);
+        buttonNext.setEnabled(true);
+        buttonRefresh.setEnabled(true);
     }
     private ArrayList<User> getUser () {
         String[] columns = {UserEntry._ID,

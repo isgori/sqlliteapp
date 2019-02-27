@@ -43,4 +43,18 @@ public class list_data extends AppCompatActivity  implements Adapter_RecycleView
 
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAdapter = null;
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAdapter = null;
+
+    }
 }
