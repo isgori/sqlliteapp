@@ -320,5 +320,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void refreshData(View view) {
+        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView);
+        nameTextView.setText( "");
+        lastTextView.setText("");
+        addressTextview.setText(" " );
 
+    }
 }
